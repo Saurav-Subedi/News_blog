@@ -1,0 +1,43 @@
+{% extends 'layouts.html' %}
+{% block content %}
+{% load static %}
+
+
+
+{% comment %} News section {% endcomment %}
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h1>{{catData.name}}</h1>
+    </div>
+</div>
+{% if newsData %}
+<div class="row mt-3">
+    {% for news in newsData%}
+      <div class="col-md-4 mb-3">
+          <div class="card">
+            {% if news.image %}
+              <img src="{{news.image.url}}" height="200" class="card-img-top" alt="...">
+            {% endif %}
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'news' news.slug %}">{{news.title}}</a></h5>
+                <p class="card-text">
+                  {{news.limit_description | safe}}
+                </p>
+                <a href="{% url 'news' news.slug %}" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+      </div>
+      {% endfor %}
+      
+  </div>
+{% else %}
+<div class="row mt-3 mb-3">
+    <h3 style="color:red;">There is no news</h1>
+        <hr>
+        <a href="{% url 'index' %}" class="btn btn-primary">Goto home page</a>
+</div>
+{% endif %}
+
+
+
+{% endblock %}

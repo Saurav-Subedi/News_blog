@@ -1,0 +1,38 @@
+{% extends 'layouts.html' %}
+{% block content %}
+{% load static %}
+
+
+{% comment %} News section {% endcomment %}
+<div class="row">
+    <div class="col-md-8 mt-5">
+        <h1><a href="">{{newsData.title}}  </a></h1>
+        {% if newsData.image %}
+        <img src="{{newsData.image.url}}" class="img-fluid" alt="">
+        {% endif %}
+        <p>Category: {{newsData.category.name}}
+            <span class="float-right">Views: {{newsData.page_views}}</span>
+
+        <p>
+           {{newsData.description | safe}}
+        </p>
+    </div>
+    <div class="col-md-4 mt-5">
+        <h1>Related news </h1>
+        <ul>
+            {% for rnews in relatedNews %}
+            <li><a href="{% url 'news' rnews.slug %}">{{rnews.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+
+</div>
+
+
+{% comment %} end news section {% endcomment %}
+
+
+
+
+{% endblock %}
